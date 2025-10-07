@@ -1,0 +1,96 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+
+# ==========================================
+#  Gradle build system
+# ==========================================
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IDE-specific
+# ------------------------------------------
+# IntelliJ / JetBrains
+.idea/
+*.iml
+*.iws
+out/
+# Eclipse
+.project
+.classpath
+.settings/
+# VSCode
+.vscode/
+
+# OS & system files
+# ------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+# ------------------------------------------
+logs/
+*.log
+*.tmp
+*.bak
+*.swp
+
+# Test reports & coverage
+# ------------------------------------------
+test-output/
+reports/
+*.exec
+*.coverage
+*.lcov
+
+# Environment & config
+# ------------------------------------------
+.env
+.env.local
+*.properties.local
+application-*.yml.local
+
+# Dependencies & archives
+# ------------------------------------------
+*.jar
+*.war
+*.zip
+*.tar.gz
+
+# Temporary files
+# ------------------------------------------
+*.class
+*.orig
+*.rej
+*.pyc
+*.swo
+*.swn
+*.tmp
+*~
+
+# Gradle caches and metadata
+# ------------------------------------------
+.gradle/
+.gradle-cache/
+.gradle/6.*/
+.gradle/7.*/
+.gradle/8.*/
+.gradle/daemon/
+.gradle/buildOutputCleanup/
+
+# IntelliJ build output
+out/
+
+# ==========================================
+#  Custom project files to keep clean
+# ==========================================
+# Local test credentials, tokens, keys
+secrets/
+keys/
+private/
+
+# Ignore generated docs (if any)
+docs/generated/
+
