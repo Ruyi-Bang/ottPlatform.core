@@ -6,6 +6,8 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.*;
 
@@ -18,11 +20,11 @@ public class JwtService {
     @Value("${security.token.expiry-minutes:60}")
     private long expiryMinutes;
 
-    private Key key;
+    private SecretKey key;
 
     @PostConstruct
     void init() {
-        this.key = Keys.hmacShaKeyFor(secret.getBytes());
+        this.key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
 
     /**
@@ -54,10 +56,10 @@ public class JwtService {
      */
     public Jws<Claims> validateToken(String token) {
         try {
-            return Jwts.parserBuilder()
-                    .setSigningKey(key)
+            return Jwts.parser()
+                    .verifyWith(key)
                     .build()
-                    .parseClaimsJws(token);
+                    .parseSignedClaims(token);
         } catch (JwtException e) {
             throw new RuntimeException("Invalid or expired token", e);
         }
