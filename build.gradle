@@ -1,10 +1,12 @@
 plugins {
     id 'java'
+    id 'java-library'
     alias(libs.plugins.dependencyManagement)
+    id 'maven-publish'
 }
 
 group = 'RuyiBang'
-version = '1.0.0'
+version = '1.0.X'
 description = 'OttPlatform Core Starter for logging, UUID, exception handling'
 
 repositories {
@@ -14,17 +16,17 @@ repositories {
 
 dependencies {
     // Spring Boot
+    implementation platform("RuyiBang:ottPlarform.root:1.0.X")
     implementation(libs.springBootWeb)
     implementation(libs.springBootSecurity)
 
     // JWT
-    implementation(libs.jjwtApi)
-    runtimeOnly(libs.jjwtImpl)
-    runtimeOnly(libs.jjwtJackson)
+    implementation "io.jsonwebtoken:jjwt-api"
+    runtimeOnly "io.jsonwebtoken:jjwt-impl"
+    runtimeOnly "io.jsonwebtoken:jjwt-jackson"
 
     // Logging
-    implementation(libs.logbackClassic)
-    implementation(libs.logstash)
+    implementation "net.logstash.logback:logstash-logback-encoder"
 
     // Tests
     testImplementation(libs.springBootTest)
@@ -32,4 +34,25 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+
+    repositories {
+        // For local development
+        mavenLocal()
+
+        // Optional remote publishing (for CI/CD)
+        // maven {
+        //     url = uri("https://your.company.repo/releases")
+        //     credentials {
+        //         username = findProperty("repoUser") ?: System.getenv("REPO_USER")
+        //         password = findProperty("repoPass") ?: System.getenv("REPO_PASS")
+        //     }
+        // }
+    }
 }
