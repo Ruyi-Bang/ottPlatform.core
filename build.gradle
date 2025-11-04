@@ -16,7 +16,7 @@ repositories {
 
 dependencies {
     // Spring Boot
-    implementation platform("RuyiBang:ottPlarform.root:1.0.X")
+    implementation platform("RuyiBang:ottPlatform.root:1.0.X")
     implementation(libs.springBootWeb)
     implementation(libs.springBootSecurity)
 
