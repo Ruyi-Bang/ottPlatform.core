@@ -1,5 +1,4 @@
 plugins {
-    id 'java'
     id 'java-library'
     alias(libs.plugins.dependencyManagement)
     id 'maven-publish'
