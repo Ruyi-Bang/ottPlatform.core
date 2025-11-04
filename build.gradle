@@ -16,6 +16,7 @@ repositories {
 dependencies {
     // Spring Boot
     implementation platform("RuyiBang:ottPlatform.root:1.0.X")
+    annotationProcessor platform("RuyiBang:ottPlatform.root:1.0.X")
     implementation(libs.springBootWeb)
     implementation(libs.springBootSecurity)
 
@@ -26,6 +27,9 @@ dependencies {
 
     // Logging
     implementation "net.logstash.logback:logstash-logback-encoder"
+
+    compileOnly "org.projectlombok:lombok"
+    annotationProcessor "org.projectlombok:lombok"
 
     // Tests
     testImplementation(libs.springBootTest)

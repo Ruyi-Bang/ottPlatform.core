@@ -31,17 +31,11 @@ public class JwtService {
      * Generate a JWT token for a user or service client.
      *
      * @param subject the unique identifier (e.g. username, clientId)
-     * @param roles list of roles or permissions assigned to the subject
-     * @param extraClaims optional custom claims like email, tenantId, etc.
+     * make sure you add roles in your claims
+     * @param claims optional custom claims like email, tenantId, etc.
      * @return signed JWT token
      */
-    public String generateToken(String subject, List<String> roles, Map<String, Object> extraClaims) {
-        Map<String, Object> claims = new HashMap<>();
-        if (extraClaims != null) {
-            claims.putAll(extraClaims);
-        }
-        claims.put("roles", roles);
-
+    public String generateToken(String subject, Map<String, Object> claims) {
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(subject)
