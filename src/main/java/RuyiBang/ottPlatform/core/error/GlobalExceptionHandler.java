@@ -2,6 +2,7 @@ package RuyiBang.ottPlatform.core.error;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +29,9 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(Map.of("timestamp", Instant.now().toString(),
                              "code", "API-500",
-                             "message", "Internal error"));
+                             "message", "Internal error",
+                            "reason", ex.getMessage(),
+                            "tranId", MDC.get("uuid")
+                ));
     }
 }
