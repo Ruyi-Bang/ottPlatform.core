@@ -35,7 +35,9 @@ public class JwtService {
      * @param claims optional custom claims like email, tenantId, etc.
      * @return signed JWT token
      */
-    public String generateToken(String subject, Map<String, Object> claims) {
+    public String generateToken(String subject, Collection<String> roles) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("roles", roles);
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(subject)
