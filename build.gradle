@@ -4,8 +4,8 @@ plugins {
     id 'maven-publish'
 }
 
-group = 'RuyiBang'
-version = '1.0.X'
+group = 'org.ruyibang'
+version = (findProperty("projectVersion") ?: "0.0-SNAPSHOT")
 description = 'OttPlatform Core Starter for logging, UUID, exception handling'
 
 repositories {
