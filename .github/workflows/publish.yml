@@ -1,0 +1,23 @@
+# .github/workflows/publish.yml (in each library repo)
+name: Publish via central workflow
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    uses: Ruyi-Bang/packages/.github/workflows/publish.yml@main
+    secrets:
+      GPR_KEY: ${{ secrets.GPR_KEY }}
+    with:
+      java-version: '21'
+      publish-url: 'https://maven.pkg.github.com/Ruyi-Bang/packages'
+      gradle-task: 'publish'
+      version-prop: 'projectVersion'
+      extra-args: '--info'
