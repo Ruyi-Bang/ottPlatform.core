@@ -44,20 +44,20 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             from components.java
+            groupId = 'org.ruyibang'
+            artifactId = 'ottplatform.core'   // <<< change: no dots
+            version = project.version
         }
     }
-
     repositories {
-        // For local development
-        mavenLocal()
-
-        // Optional remote publishing (for CI/CD)
-        // maven {
-        //     url = uri("https://your.company.repo/releases")
-        //     credentials {
-        //         username = findProperty("repoUser") ?: System.getenv("REPO_USER")
-        //         password = findProperty("repoPass") ?: System.getenv("REPO_PASS")
-        //     }
-        // }
+        // mavenLocal()   // optional; you can remove it for CI
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/Ruyi-Bang/packages")
+            credentials {
+                username = findProperty("githubUsername") ?: System.getenv("GPR_USER")
+                password = findProperty("githubToken")    ?: System.getenv("GPR_KEY")
+            }
+        }
     }
 }
