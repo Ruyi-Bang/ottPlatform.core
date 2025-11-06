@@ -1,9 +1,12 @@
-# .github/workflows/publish.yml (in each library repo)
 name: Publish via central workflow
 
 on:
   push:
-    tags: ['v*']
+    branches: [ main ]          # run on commits
+    tags: [ 'v*' ]
+    # Optional: only when files in this module change
+    # paths:
+    #   - 'services/token-service/**'
   workflow_dispatch:
 
 permissions:
@@ -14,10 +17,12 @@ jobs:
   publish:
     uses: Ruyi-Bang/packages/.github/workflows/publish.yml@main
     secrets:
-      GPR_KEY: ${{ secrets.GPR_KEY }}
+      GPR_KEY: ${{ secrets.GPR_KEY }}     # org-level PAT with write:packages + SSO
     with:
       java-version: '21'
       publish-url: 'https://maven.pkg.github.com/Ruyi-Bang/packages'
       gradle-task: 'publish'
       version-prop: 'projectVersion'
+      module-path: 'services/token-service'    # <-- your subproject folder
+      build-file: 'build.gradle.kts'           # or 'build.gradle'
       extra-args: '--info'
