@@ -6,7 +6,7 @@ on:
     tags: [ 'v*' ]
     # Optional: only when files in this module change
     # paths:
-    #   - 'services/token-service/**'
+    #   - 'ottPlatform.core/**'
   workflow_dispatch:
 
 permissions:
@@ -23,6 +23,6 @@ jobs:
       publish-url: 'https://maven.pkg.github.com/Ruyi-Bang/packages'
       gradle-task: 'publish'
       version-prop: 'projectVersion'
-      module-path: 'services/token-service'    # <-- your subproject folder
-      build-file: 'build.gradle.kts'           # or 'build.gradle'
+      module-path: 'ottPlatform.core'    # <-- your subproject folder
+      build-file: 'build.gradle'           # or 'build.gradle'
       extra-args: '--info'
